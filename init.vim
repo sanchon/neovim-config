@@ -79,6 +79,8 @@ Plug 'mrtazz/simplenote.vim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'yegappan/mru'
+Plug 'easymotion/vim-easymotion'
+Plug 'airblade/vim-gitgutter'
 Plug 'vim-syntastic/syntastic'
 call plug#end()
 
