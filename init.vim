@@ -1,8 +1,7 @@
-scriptencoding=utf8
-
 "=====================
 " General
 "=====================
+scriptencoding=utf8
 set nowrap
 set clipboard+=unnamedplus
 if has('gui_running')
