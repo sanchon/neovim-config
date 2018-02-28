@@ -82,6 +82,7 @@ Plug 'yegappan/mru'
 Plug 'easymotion/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-syntastic/syntastic'
+Plug 'tpope/vim-capslock'
 call plug#end()
 
 
@@ -127,7 +128,11 @@ map <leader>g :GundoToggle<CR>
 if has('gui_running')
     let g:airline_powerline_fonts=1  "(estos simbolitos no funcionan en la shell)
 endif
-
+let g:airline#extensions#branch#enabled = 0
+let g:bufferline_echo = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline_section_b =airline#section#create_left(['%{CapsLockStatusline()}'])
 
 
 "========================================================================
@@ -139,3 +144,7 @@ let g:pandoc#folding#level=20
 
 
 
+"========================================================================
+"  Plugin: Syntastic - para compilar con z88dk
+"========================================================================
+let g:syntastic_c_compiler_options='-I. -I/Applications/z88dk/lib/config//../..//include -E -o /dev/null'
