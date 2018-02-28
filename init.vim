@@ -20,7 +20,7 @@ set autochdir                                    "cambia el directorio actual al
 set wildmenu
 set wildmode=full
 
-let g:mapleader='º'
+let g:mapleader=' '
 
 tnoremap <Esc> <C-\><C-n>                        "terminal en Neovim, la tecla por defecto es muy chunga
 
@@ -37,7 +37,8 @@ imap <C-Tab> <Esc>:tabnext<CR>
 map <C-S-Tab> :tabprevious<CR>
 imap <C-S-Tab> <Esc>:tabprevious<CR>
 
-
+"soy incapaz de usar CTRL-] para navegar por la ayuda, así que uso CTRL-+
+nnoremap <c-+> :tag <c-r><c-w><cr>
 
 
 
@@ -79,7 +80,7 @@ Plug 'mrtazz/simplenote.vim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'yegappan/mru'
-Plug 'neomake/neomake'
+Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 
@@ -88,7 +89,7 @@ call plug#end()
 "========================================================================
 "  Colorscheme:solarized
 "========================================================================
-colorscheme nova
+colorscheme torte
 
 "========================================================================
 "  Plugin:simplenote
@@ -119,7 +120,6 @@ map <leader>g :GundoToggle<CR>
 
 
 
-
 "========================================================================
 "  Plugin:Airline (ojo, necesitas una "patched font" para que mole)
 "========================================================================
@@ -137,10 +137,4 @@ let g:pandoc#folding#level=20
 
 
 
-"========================================================================
-"  Plugin: Neomake
-"========================================================================
-autocmd InsertChange,TextChanged * update | Neomake
-let g:neomake_highlight_lines=1
-let g:neomake_open_list=1
 
