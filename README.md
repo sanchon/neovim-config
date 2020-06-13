@@ -8,9 +8,8 @@ mi configuración para neovim, lista para usar
 instalación
 -----------
 
-(mac)
-    
     cd .config/nvim
+    (Windows) cd ~/AppData/Local/nvim
     git clone https://github.com/sanchon/neovim-config.git
     mkdir autoload
     cd autoload
