@@ -1,6 +1,23 @@
+"------------------------------------
+" NEOVIM config de Hugo
+"------------------------------------
+
+
+"------------------------------------
+" leader=SPACE
+"------------------------------------
+let mapleader=" "
+
+
+
+
+
 "-----------------------------------
+" USABILIDAD
+"-----------------------------------
+
+
 " para cambiar de buffer rápidamente
-"-----------------------------------
 set hidden                                       "no me importa que haya buffers ocultos
 map <F8> :bn<CR>
 imap <F8> <Esc>:bn<CR>
@@ -8,18 +25,14 @@ map <F7> :bp<CR>
 imap <F7> <Esc>:bp<CR>
 map <F5> :e<CR>G
 
-"--------------------------------
 " para cambiar de tab rápidamente
-"--------------------------------
 map <C-Tab> :tabnext<CR>
 imap <C-Tab> <Esc>:tabnext<CR>
 map <C-S-Tab> :tabprevious<CR>
 imap <C-S-Tab> <Esc>:tabprevious<CR>
 
 
-"------------------------------------
 " en Windows copy-paste ctrl-c ctrl-v
-"------------------------------------
 set clipboard=unnamed
 if has("win32")                                  
 	" ---- Windows Like Copy-Paste keys ----
@@ -34,31 +47,13 @@ endif
 
 
 
-"------------------------------------
-" leader=SPACE
-"------------------------------------
-let mapleader=" "
-
-
-"--------------------------------------------------------------------------
-" aspecto
-"--------------------------------------------------------------------------
-set number
-syntax on                                 "colorear sintaxis
-set textwidth=0 	                   "rompe autom. a los X caracteres con un CRLF
-set relativenumber
-set showcmd                               "muestra el comando en la statusline
-set listchars=tab:→\ ,trail:·,precedes:«,extends:»,eol:¶,space:·
-"--------------------------------------------------------------------------
 
 
 
 
-
-
-
-
-
+"-----------------------------------
+" PLUGINS
+"-----------------------------------
 call plug#begin()
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -85,8 +80,16 @@ call plug#end()
 
 
 
-
-
+"--------------------------------------------------------------------------
+" ASPECTO
+"--------------------------------------------------------------------------
+set number
+syntax on                                 "colorear sintaxis
+set textwidth=0 	                   "rompe autom. a los X caracteres con un CRLF
+set relativenumber
+set showcmd                               "muestra el comando en la statusline
+set listchars=tab:→\ ,trail:·,precedes:«,extends:»,eol:¶,space:·
+colorscheme Monokai
 
 
 
@@ -102,7 +105,6 @@ map <leader>N :NERDTreeFind<CR>
 "  Plugin:Gundo
 " ------------------------------------------------------------------------
 map <leader>g :GundoToggle<CR>
-
 
 
 " ------------------------------------------------------------------------
