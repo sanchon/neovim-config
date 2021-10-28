@@ -16,7 +16,6 @@ let mapleader=" "
 " USABILIDAD
 "-----------------------------------
 
-
 " para cambiar de buffer rápidamente
 set hidden                                       "no me importa que haya buffers ocultos
 map <F8> :bn<CR>
@@ -56,25 +55,22 @@ endif
 "-----------------------------------
 call plug#begin()
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'tomtom/tcomment_vim' 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-capslock'
-Plug 'sjl/gundo.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'mrtazz/simplenote.vim'
-Plug 'scrooloose/syntastic'
+Plug 'vim-syntastic/syntastic'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'bronson/vim-visual-star-search'
 Plug 'klen/python-mode'
-Plug 'vim-scripts/visSum.vim'
 Plug 'yegappan/mru'
 Plug 'easymotion/vim-easymotion'
 Plug 'thinca/vim-fontzoom'
 Plug 'flazz/vim-colorschemes'
 Plug 'airblade/vim-gitgutter'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 
@@ -91,8 +87,38 @@ set showcmd                               "muestra el comando en la statusline
 set listchars=tab:→\ ,trail:·,precedes:«,extends:»,eol:¶,space:·
 colorscheme Monokai
 
+" fontzoom no existe, asi que nos lo hacemos nosotros
+let s:fontsize = 9
+function! AdjustFontSize(amount)
+  let s:fontsize = s:fontsize+a:amount
+  :execute "GuiFont! Fira\ Code\ Medium:h" . s:fontsize
+endfunction
+map <leader>+ :call AdjustFontSize(1)<CR>
+map <leader>- :call AdjustFontSize(-1)<CR>
 
 
+"--------------------------------------------------------------------------
+" FTP AL HOST
+"--------------------------------------------------------------------------
+"
+" para hacer FTP lo lógico es esto:
+let g:netrw_ftpmode="ascii"
+"
+" usuario y password de ftp en fichero aparte, en windows. En otros sistemas
+" mejor usar .netrc
+let g:netrw_ftp_cmd= "ftp -s:" . $HOME . "\\MACHINE.ftp"
+" al hacer logon con el fichero salen mensajes en la ventana de mensajes... me
+" la cargo:
+let g:netrw_use_errorwindow=0
+let g:netrw_silent=1
+" FTPs al host: así me ahorro el mvsp1 y las comillas al inicio y al final:
+command! -nargs=+ Host e ftp://mvsp1/\'<args>\'
+command! -nargs=+ PLI e ftp://mvsp1/'sys1.cage.fuentes(<args>)' | setlocal filetype=pli
+command! -nargs=+ INC e ftp://mvsp1/'cage.maclib(<args>)' | setlocal filetype=pli
+command! -nargs=+ JCL e ftp://mvsp1/'sys1.cage.jcllib(<args>)' | setlocal filetype=jcl
+command! -nargs=+ JCLD e ftp://mvsp1/'sys1.cage.jcllib(<args>)' | setlocal filetype=sh
+command! -nargs=+ FILE e ftp://mvse1/'<args>'
+"--------------------------------------------------------------------------
 
 " ------------------------------------------------------------------------
 "  Plugin:NerdTree
@@ -101,10 +127,6 @@ map <leader>n :NERDTreeToggle<CR>
 map <leader>N :NERDTreeFind<CR>
 
 
-" ------------------------------------------------------------------------
-"  Plugin:Gundo
-" ------------------------------------------------------------------------
-map <leader>g :GundoToggle<CR>
 
 
 " ------------------------------------------------------------------------
@@ -119,9 +141,18 @@ command! PandocAutoEjecutarMyRevealJsWeb let g:pandoc#command#autoexec_command =
 
 
 
+
+
+
 " ------------------------------------------------------------------------
-"  Plugin: Fontzoom
+"  Plugin: vimwiki
 " ------------------------------------------------------------------------
-let g:fontzoom_no_default_key_mappings = 1 "por defecto son + y -
-map <leader>+ <plug>(fontzoom-larger)
-map <leader>- <plug>(fontzoom-smaller)
+let g:vimwiki_list = [{
+   \ 'path':'~\notas', 
+   \ 'syntax':'markdown', 
+   \ 'ext': '.md',
+\}]
+let g:vimwiki_global_ext = 0
+let g:vimwiki_markdown_link_ext = 1
+let g:vimwiki_url_maxsave=0
+
