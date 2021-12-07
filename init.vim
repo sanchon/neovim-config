@@ -10,9 +10,6 @@
 let mapleader=" "
 
 
-
-
-
 "-----------------------------------
 " USABILIDAD
 "-----------------------------------
@@ -32,21 +29,22 @@ map <C-S-Tab> :tabprevious<CR>
 imap <C-S-Tab> <Esc>:tabprevious<CR>
 
 
-" en Windows copy-paste ctrl-c ctrl-v
+" en Windows copy-paste ctrl-c ctrl-v (incluyendo en el modo comando, muy
+" util)
 set clipboard=unnamed
 if has("win32")                                  
 	" ---- Windows Like Copy-Paste keys ----
 	" CTRL-v is paste
 	inoremap <C-v> <esc>"*p<return>i
+        cnoremap <C-v> <C-r>*
 	" CTRL-x is cut (in visual mode only)
 	vnoremap <C-x> "*d
 	" CTRL-c is copy (in visual mode only)
 	vnoremap <C-c> "*y
 endif
 
-
-
-
+" si no hago esto, el raton no funciona
+set mouse=a
 
 
 
@@ -74,8 +72,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'akinsho/bufferline.nvim'
+Plug 'dhruvasagar/vim-open-url'
 call plug#end()
-
 
 
 
@@ -88,18 +86,17 @@ set textwidth=0 	                   "rompe autom. a los X caracteres con un CRLF
 set relativenumber
 set showcmd                               "muestra el comando en la statusline
 set listchars=tab:→\ ,trail:·,precedes:«,extends:»,eol:¶,space:·
-colorscheme Monokai
+colorscheme tchaba
 
 " fontzoom no existe, asi que nos lo hacemos nosotros
 let s:fontsize = 9
+let s:fontname = "Fira Code"
 function! AdjustFontSize(amount)
   let s:fontsize = s:fontsize+a:amount
-  :execute "GuiFont! FiraCode\ Nerd\ Font:h" . s:fontsize
+  :execute "GuiFont! "s:fontname . ":h" . s:fontsize
 endfunction
 map <leader>+ :call AdjustFontSize(1)<CR>
 map <leader>- :call AdjustFontSize(-1)<CR>
-set guifont="FiraCode\ Nerd\ Font:h9"
-
 
 "--------------------------------------------------------------------------
 " FTP AL HOST
@@ -170,7 +167,17 @@ let g:airline#extensions#tabline#enabled=0
 
 
 
+" ------------------------------------------------------------------------
+"  Plugin: vim-open-url
+" ------------------------------------------------------------------------
+nmap gb <Plug>(open-url-browser)
+xmap gb <Plug>(open-url-browser)
 
+
+
+" ------------------------------------------------------------------------
+"  Plugin:Bufferline
+" ------------------------------------------------------------------------
 set termguicolors
 lua << EOF
 require("bufferline").setup{}
