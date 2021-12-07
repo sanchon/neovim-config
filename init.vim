@@ -72,6 +72,8 @@ Plug 'thinca/vim-fontzoom'
 Plug 'flazz/vim-colorschemes'
 Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
+Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+Plug 'akinsho/bufferline.nvim'
 call plug#end()
 
 
@@ -92,10 +94,11 @@ colorscheme Monokai
 let s:fontsize = 9
 function! AdjustFontSize(amount)
   let s:fontsize = s:fontsize+a:amount
-  :execute "GuiFont! Fira\ Code\ Medium:h" . s:fontsize
+  :execute "GuiFont! FiraCode\ Nerd\ Font:h" . s:fontsize
 endfunction
 map <leader>+ :call AdjustFontSize(1)<CR>
 map <leader>- :call AdjustFontSize(-1)<CR>
+set guifont="FiraCode\ Nerd\ Font:h9"
 
 
 "--------------------------------------------------------------------------
@@ -157,3 +160,18 @@ let g:vimwiki_global_ext = 0
 let g:vimwiki_markdown_link_ext = 1
 let g:vimwiki_url_maxsave=0
 
+
+
+" ------------------------------------------------------------------------
+"  Plugin:Airline (ojo, necesitas una "patched font" para que mole)
+" ------------------------------------------------------------------------
+let g:airline_powerline_fonts=1  "(estos simbolitos no funcionan en la shell)
+let g:airline#extensions#tabline#enabled=0
+
+
+
+
+set termguicolors
+lua << EOF
+require("bufferline").setup{}
+EOF
